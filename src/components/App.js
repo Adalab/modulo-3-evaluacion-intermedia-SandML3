@@ -98,30 +98,32 @@ function App() {
           </ul>
         </section>
         
-        <form className='add_new_quote'>
-          <h3>Añadir una nueva clase</h3>
+        <form className='main__new_quote'>
+          <h3 className='main__new_quote__title'>Añadir una nueva clase</h3>
 
-          <label htmlFor='quote'>Frase</label>
+          <label htmlFor='quote' className='main__new_quote__label'>Frase</label>
           <input 
           type="text" 
           name="quote"
           id="quote"
+          className='main__new_quote__input'
           placeholder='Ej. Unagi!'
           value={newQuote.quote}
           onChange={handleNewQuote}
           ></input>
 
-          <label htmlFor='character'>Personaje</label>
+          <label htmlFor='character' className='main__new_quote__label'>Personaje</label>
           <input 
           type="text" 
           id="character"
           name="character"
+          className='main__new_quote__input'
           placeholder='Ej. Ross'
           value={newQuote.character}
           onChange={handleNewQuote}
           ></input>
 
-          <button onClick={handleAddQuote}>Añadir una nueva frase</button>
+          <button onClick={handleAddQuote} className='main__new_quote__button'>Añadir una nueva frase</button>
 
         </form>
       </main>
