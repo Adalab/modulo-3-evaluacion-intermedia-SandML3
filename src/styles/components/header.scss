@@ -1,0 +1,23 @@
+.header {
+    &__search {
+        padding: 1rem 0rem;
+        text-align: center;
+
+        &__title{
+            font-size: 1.3rem;
+            border-bottom: solid rgb(199, 199, 199) 1px;
+            margin-bottom: 2rem;
+        }
+
+        &__label {
+            padding: 0.5rem;
+        }
+
+        &__input {
+            border-radius: 1rem;
+            background-color: rgb(142, 200, 204);
+            border:  rgb(142, 200, 204) solid 2px;
+            font-size: 1rem;
+        }
+    }
+}

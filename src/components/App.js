@@ -27,7 +27,7 @@ function App() {
     .filter(quote => {
       return quote.character.toLowerCase().includes(searchFilters.character.toLowerCase()) && quote.quote.toLowerCase().includes(searchFilters.quote.toLowerCase())})
     .map((quote, index) => {
-      return <li key={index}>{quote.quote}-{quote.character}</li>
+      return <li key={index} className="main__quotes__quote">{quote.quote}-{quote.character}</li>
     })
 
   const handleNewQuote = (ev) => {
@@ -58,43 +58,49 @@ function App() {
 
   return (
     <div>
-      <header>
-        <h1>Frases de Friends</h1>
-        <label htmlFor='quote-filter'>Filtrar por frase</label>
-        <input 
-        type="text" 
-        id="quote" 
-        name="quote"
-        value={searchFilters.quote}
-        onChange={handleFilter}
-        ></input>
+      <header className='header'>
+        <form className='header__search'>
+          <h1 className='header__search__title'>Frases de Friends</h1>
 
-        <label htmlFor='character-filter'>Filtrar por personaje</label>
-        <select 
-        name='character' 
-        id="character-filter"
-        value={searchFilters.character}
-        onChange={handleFilter}
-        >
-          <option value=''>Todos</option>
-          <option value="Ross">Ross</option>
-          <option value="Monica">Mónica</option>
-          <option value="Joey">Joey</option>
-          <option value="Phoebe">Phoebe</option>
-          <option value="Chandler">Chandler</option>
-          <option value="Rachel">Rachel</option>
-        </select>
+          <label htmlFor='quote-filter' className='header__search__label'>Filtrar por frase</label>
+          <input
+          type="text"
+          id="quote"
+          name="quote"
+          className='header__search__input'
+          value={searchFilters.quote}
+          onChange={handleFilter}
+          ></input>
+
+          <label htmlFor='character-filter' className='header__search__label'>Filtrar por personaje</label>
+          <select
+          name='character'
+          id="character-filter"
+          className='header__search__input'
+          value={searchFilters.character}
+          onChange={handleFilter}
+          >
+            <option value=''>Todos</option>
+            <option value="Ross">Ross</option>
+            <option value="Monica">Mónica</option>
+            <option value="Joey">Joey</option>
+            <option value="Phoebe">Phoebe</option>
+            <option value="Chandler">Chandler</option>
+            <option value="Rachel">Rachel</option>
+          </select>
+        </form>
       </header>
       
-      <main>
-        <section className='quotes'>
-          <ul>
+      <main className='main'>
+        <section >
+          <ul className='main__quotes'>
             {renderQuotes}
           </ul>
         </section>
         
-        <section className='add_new_quote'>
+        <form className='add_new_quote'>
           <h3>Añadir una nueva clase</h3>
+
           <label htmlFor='quote'>Frase</label>
           <input 
           type="text" 
@@ -117,7 +123,7 @@ function App() {
 
           <button onClick={handleAddQuote}>Añadir una nueva frase</button>
 
-        </section>
+        </form>
       </main>
     </div>
   );
