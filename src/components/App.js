@@ -1,20 +1,27 @@
 import '../styles/App.scss';
-import { useState } from 'react';
-import Quotes from '../data/quotes.json';
-
+import { useState, useEffect } from 'react';
+import callToApi from '../services/api';
+// import Quotes from '../data/quotes.json';
+import ls from '../services/ls';
 
 
 function App() {
-  const [quotes, setQuotes] = useState(Quotes);
+  const [quotes, setQuotes] = useState([]);
   const [newQuote, setNewQuote] = useState({
     character: '',
     quote: ''
   })
 
-  const [searchFilters, setSearchFilters] = useState({
+  useEffect(() => {
+    callToApi().then((response) => {
+      setQuotes(response);
+    });
+  }, []);
+
+  const [searchFilters, setSearchFilters] = useState(ls.get('searchFilters', {
     character: '',
     quote: ''
-  })
+  }));
 
   const renderQuotes = quotes
     .filter(quote => {
@@ -40,7 +47,13 @@ function App() {
   const handleFilter = (ev) => {
     setSearchFilters({...searchFilters, [ev.target.name]: ev.target.value})
   }
-
+  
+  useEffect(() => {
+    ls.set('searchFilters', {
+      character: searchFilters.character,
+      quote: searchFilters.quote
+    });
+  }, [searchFilters]);
 
 
   return (
