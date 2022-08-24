@@ -7,11 +7,14 @@
         &__quote{
             border: 1px solid  rgb(142, 200, 204);
             list-style: none;
-            padding: 0.3rem;
+            padding: 0.5rem;
             border-radius: 0.8rem;
             margin: 1rem;
-            display: flex;
-            align-items: center;
+            text-align: center;
+        }
+
+        &__quote--character{
+            font-weight: 800;
         }
     }
 
@@ -36,14 +39,14 @@
         &__input {
             border-radius: 1rem;
             background-color: rgb(142, 200, 204);
-            height: 1.8rem;
+            height: 2rem;
+            padding-left: 1rem;
             border:  rgb(142, 200, 204) solid 2px;
             font-size: 1rem;
             width: 40%;
         }
 
         ::placeholder {
-            padding-left: 0.8rem;
             color: white;
             font-size: 0.9rem;
         }

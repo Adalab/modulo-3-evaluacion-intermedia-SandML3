@@ -5,7 +5,12 @@ import callToApi from '../services/api';
 import ls from '../services/ls';
 
 
+
 function App() {
+  const [warningText, setWarningText] = useState({
+    text:'',
+    className:''
+  });
   const [quotes, setQuotes] = useState([]);
   const [newQuote, setNewQuote] = useState({
     character: '',
@@ -27,21 +32,31 @@ function App() {
     .filter(quote => {
       return quote.character.toLowerCase().includes(searchFilters.character.toLowerCase()) && quote.quote.toLowerCase().includes(searchFilters.quote.toLowerCase())})
     .map((quote, index) => {
-      return <li key={index} className="main__quotes__quote">{quote.quote}-{quote.character}</li>
+      return <li key={index} className="main__quotes__quote">{quote.quote}-<span className='main__quotes__quote--character'>{quote.character}</span></li>
     })
 
+
+
   const handleNewQuote = (ev) => {
-    setNewQuote({...newQuote, [ev.target.id]:ev.currentTarget.value});
+      setNewQuote({...newQuote, [ev.target.id]:ev.currentTarget.value})
   }
 
   
   const handleAddQuote = (ev) => {
     ev.preventDefault();
-    setQuotes([...quotes, newQuote])
-    setNewQuote({
-      character: '',
-      quote: '',
-    })
+    if (!newQuote.character || !newQuote.quote) {
+      setWarningText({
+        className:'warning-text',
+        text:'Debe rellenar todos los campos',
+      })
+    } else {
+      setQuotes([...quotes, newQuote])
+      setNewQuote({
+        character: '',
+        quote: '',
+      });
+      setWarningText('');
+    }
   }
 
   const handleFilter = (ev) => {
@@ -102,6 +117,8 @@ function App() {
         
         <form className='main__new_quote'>
           <h3 className='main__new_quote__title'>Añadir una nueva clase</h3>
+           
+          <p className={warningText.className}>{warningText.text}</p>
 
           <label htmlFor='quote' className='main__new_quote__label'>Frase</label>
           <input 
@@ -113,6 +130,7 @@ function App() {
           value={newQuote.quote}
           onChange={handleNewQuote}
           ></input>
+         
 
           <label htmlFor='character' className='main__new_quote__label'>Personaje</label>
           <input 
