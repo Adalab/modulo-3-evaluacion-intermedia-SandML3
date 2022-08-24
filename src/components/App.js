@@ -17,9 +17,13 @@ function App() {
     quote: ''
   })
 
+  const [allCharacters, setAllCharacters] = useState([])
+
   useEffect(() => {
     callToApi().then((response) => {
       setQuotes(response);
+      const characters = new Set(response.map(item => item.character))
+      setAllCharacters([...characters])
     });
   }, []);
 
@@ -28,22 +32,33 @@ function App() {
     quote: ''
   }));
 
+  const renderCharacterOptions = () => {
+    return allCharacters.map((character, index) => {
+    return <option key={index} value={character.toLowerCase()}>{character}</option>})
+  }
+
   const renderQuotes = quotes
     .filter(quote => {
       return quote.character.toLowerCase().includes(searchFilters.character.toLowerCase()) && quote.quote.toLowerCase().includes(searchFilters.quote.toLowerCase())})
     .map((quote, index) => {
-      return <li key={index} className="main__quotes__quote">{quote.quote} - <span className='main__quotes__quote--character'>{quote.character}</span></li>
+      return <li key={index} className="main__quotes__quote">{quote.quote.charAt(0).toUpperCase() + quote.quote.slice(1)} - <span className='main__quotes__quote--character'>{quote.character.charAt(0).toUpperCase() + quote.character.slice(1).toLowerCase()}</span></li>
     })
-
 
 
   const handleNewQuote = (ev) => {
       setNewQuote({...newQuote, [ev.target.id]:ev.currentTarget.value})
-  }
+  };
 
+
+  const isNewCharacter = () => {
+    if (quotes.indexOf(item => item.character.toLowerCase() === newQuote.character.toLocaleLowerCase()) === -1) {
+       setAllCharacters([...allCharacters, newQuote.character.charAt(0).toUpperCase() + newQuote.character.slice(1)])
+    }
+  }
   
   const handleAddQuote = (ev) => {
     ev.preventDefault();
+    isNewCharacter();
     if (!newQuote.character || !newQuote.quote) {
       setWarningText({
         className:'warning-text',
@@ -51,17 +66,20 @@ function App() {
       })
     } else {
       setQuotes([...quotes, newQuote])
+
       setNewQuote({
         character: '',
         quote: '',
       });
       setWarningText('');
     }
-  }
+  };
+
+
 
   const handleFilter = (ev) => {
     setSearchFilters({...searchFilters, [ev.target.name]: ev.target.value})
-  }
+  };
   
   useEffect(() => {
     ls.set('searchFilters', {
@@ -97,12 +115,13 @@ function App() {
           onChange={handleFilter}
           >
             <option value=''>Todos</option>
-            <option value="Ross">Ross</option>
+            {renderCharacterOptions()}
+            {/* <option value="Ross">Ross</option>
             <option value="Monica">Mónica</option>
             <option value="Joey">Joey</option>
             <option value="Phoebe">Phoebe</option>
             <option value="Chandler">Chandler</option>
-            <option value="Rachel">Rachel</option>
+            <option value="Rachel">Rachel</option> */}
           </select>
 
         </form>
