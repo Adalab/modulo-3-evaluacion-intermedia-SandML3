@@ -1,13 +1,15 @@
 .header {
 
     &__title{
+        margin-top: 2.5rem;
         text-align: center;
-        font-size: 1.3rem;
+        font-size: 1.5rem;
         border-bottom: solid rgb(199, 199, 199) 1px;
         margin-bottom: 2rem;
     }
     
     &__search {
+        
         padding: 1rem 0rem;
         text-align: center;
 

@@ -32,7 +32,7 @@ function App() {
     .filter(quote => {
       return quote.character.toLowerCase().includes(searchFilters.character.toLowerCase()) && quote.quote.toLowerCase().includes(searchFilters.quote.toLowerCase())})
     .map((quote, index) => {
-      return <li key={index} className="main__quotes__quote">{quote.quote}-<span className='main__quotes__quote--character'>{quote.character}</span></li>
+      return <li key={index} className="main__quotes__quote">{quote.quote} - <span className='main__quotes__quote--character'>{quote.character}</span></li>
     })
 
 
@@ -116,7 +116,7 @@ function App() {
         </section>
         
         <form className='main__new_quote'>
-          <h3 className='main__new_quote__title'>Añadir una nueva clase</h3>
+          <h3 className='main__new_quote__title'>Añadir una nueva frase</h3>
            
           <p className={warningText.className}>{warningText.text}</p>
 
