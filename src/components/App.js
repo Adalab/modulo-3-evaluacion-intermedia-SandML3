@@ -59,8 +59,9 @@ function App() {
   return (
     <div>
       <header className='header'>
+        <h1 className='header__title'>Frases de Friends</h1>
+
         <form className='header__search'>
-          <h1 className='header__search__title'>Frases de Friends</h1>
 
           <label htmlFor='quote-filter' className='header__search__label'>Filtrar por frase</label>
           <input
@@ -88,6 +89,7 @@ function App() {
             <option value="Chandler">Chandler</option>
             <option value="Rachel">Rachel</option>
           </select>
+
         </form>
       </header>
       
